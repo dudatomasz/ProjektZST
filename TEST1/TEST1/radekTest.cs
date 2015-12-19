@@ -8,6 +8,11 @@ namespace TEST1
 {
     class radekTest
     {//Radek
-        //Tomek do not touch this
+        // Moja edycja jest lepsza! -Tomek
+        // Moja edycja jest lepsza! -Tomek
+        // Moja edycja jest lepsza! -Tomek
+        // Moja edycja jest lepsza! -Tomek
+        // Moja edycja jest lepsza! -Tomek
+        // Moja edycja jest lepsza! -Tomek
     }
 }
