@@ -8,5 +8,6 @@ namespace TEST1
 {
     class radekTest
     {//Radek
+        //Tomek do not touch this
     }
 }
