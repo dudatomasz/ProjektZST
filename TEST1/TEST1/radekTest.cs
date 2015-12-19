@@ -14,5 +14,6 @@ namespace TEST1
         // Moja edycja jest lepsza! -Tomek
         // Moja edycja jest lepsza! -Tomek
         // Moja edycja jest lepsza! -Tomek
+        //Bańka here
     }
 }
