@@ -9,12 +9,16 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace UdpMibTreeManager
 {
     public partial class Form1 : Form
     {
+
+        private bool temp=false;
+
         public Form1()
         {
             InitializeComponent();
@@ -79,5 +83,53 @@ namespace UdpMibTreeManager
 
             return table;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        System.Timers.Timer t;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            temp = !temp;
+            if (t==null)
+                t = new System.Timers.Timer();
+            if (temp)
+            {
+                button2.Text = "stop";
+                t.Interval = Convert.ToInt32(numericUpDown1.Value);
+                t.Elapsed += new ElapsedEventHandler(this.Refresh);
+                t.Start();
+
+            }
+            else
+            {
+                t.Stop();
+                button2.Text = "Obserwuj";
+            }
+
+        }
+
+        public void Refresh(object sender, EventArgs e)
+        {
+            string oid = textBox1.Text;
+            GetValue(oid);
+        }
+
+        public void GetValue(string oid)
+        {
+            var result = Messenger.Get(VersionCode.V1,
+                           new IPEndPoint(IPAddress.Parse("127.0.0.1"), 161),
+                           new OctetString("ProjektZST"),
+                           new List<Variable> { new Variable(new ObjectIdentifier(oid)) },
+                           10000);
+            LabelExtentions.RefreshLabel(label7,result[0].Data.ToString());
+                
+        }
+        
+        
+        
+
+        
     }
 }
