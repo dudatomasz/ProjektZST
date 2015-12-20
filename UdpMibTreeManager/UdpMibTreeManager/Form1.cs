@@ -22,7 +22,13 @@ namespace UdpMibTreeManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var result = Messenger.GetTable(VersionCode.V2, new IPEndPoint(IPAddress.Parse("127.0.0.1"), 161), new OctetString("ProjektZST"), new ObjectIdentifier(".1.3.6.1.2.1.4.21"), 10000, 1000, null);
+#pragma warning disable CS0618 // Type or member is obsolete
+            var result = Messenger.GetTable(VersionCode.V2, 
+                new IPEndPoint(IPAddress.Parse("127.0.0.1"), 161),
+                new OctetString("ProjektZST"),
+                new ObjectIdentifier(".1.3.6.1.2.1.4.21"),
+                10000, 1000, null);
+#pragma warning restore CS0618 // Type or member is obsolete
 
             var list1 = new List<string>();
             var list2 = new List<string>();
