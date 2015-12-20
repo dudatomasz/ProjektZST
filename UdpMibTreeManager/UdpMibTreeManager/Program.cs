@@ -22,7 +22,7 @@ namespace UdpMibTreeManager
             // TOMEKTOMEKTOMEK
             // TOMKE
             // komentarz Tomek
-            //fghjkjh
+            // komentarz Tomke
         }
     }
 }
