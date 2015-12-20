@@ -21,8 +21,6 @@ namespace UdpMibTreeManager
             // tghjkl;
             // TOMEKTOMEKTOMEK
             // TOMKE
-            // komentarz Tomek
-            // komentarz Tomke
         }
     }
 }
