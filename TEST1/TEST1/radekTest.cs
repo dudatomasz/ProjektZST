@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lextm.SharpSnmpLib;
-using Lextm.SharpSnmpLib.Messaging;
-using System.Net;
 
 namespace TEST1
 {
