@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -15,6 +16,7 @@ namespace UdpMibTreeManager
 {
     public partial class Form1 : Form
     {
+        private string watchedOID;
         public Form1()
         {
             InitializeComponent();
@@ -26,27 +28,27 @@ namespace UdpMibTreeManager
             var result = Messenger.GetTable(VersionCode.V2, 
                 new IPEndPoint(IPAddress.Parse("127.0.0.1"), 161),
                 new OctetString("ProjektZST"),
-                new ObjectIdentifier(".1.3.6.1.2.1.4.21"),
+                new ObjectIdentifier(oidTextBox.Text),
                 10000, 1000, null);
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            var list1 = new List<string>();
-            var list2 = new List<string>();
+           
 
-            int n = result.GetUpperBound(0)+1;
-            for (int i = 0; i < n; i++)
+            var list1 = new List<string[]>();
+            var list2 = new List<string[]>();
+            for (int i = 0; i < result.GetLength(0); i++)
             {
-                list1.Add(result[i, 0].Data.ToString());
-                list2.Add(result[i, 1].Data.ToString());
-            }
-            var list3 = new List<string[]>();
-            for (int i = 0; i < list1.Count; i++)
-            {
-                list3.Add(new string[] { list1[i], list2[i] });
+                var listTmp = new List<string>();
+                for (int j = 0; j < result.GetLength(1); j++)
+                {
+                    listTmp.Add(result[i, j].Data.ToString());
+                }
+                
+                list1.Add(listTmp.ToArray());
             }
 
-            var dt = ConvertListToDataTable(list3);
-            dataGridView1.DataSource = dt;
+            var dt = ConvertListToDataTable(list1);
+            chosenTableGridView.DataSource = dt;
             
         }
         static DataTable ConvertListToDataTable(List<string[]> list)
@@ -79,5 +81,34 @@ namespace UdpMibTreeManager
 
             return table;
         }
+
+        private void watchObjectButton_Click(object sender, EventArgs e)
+        {
+            watchedOID = oidTextBox.Text;
+            watchTimer.Interval = Convert.ToInt32( delayNumericUpDown.Value);
+            GetValueFromOID();
+            if (!watchTimer.Enabled)
+                watchTimer.Start();
+            else
+                watchTimer.Stop();             
+        }
+
+        private string GetValueFromOID ()
+        {
+            var result = Messenger.Get(VersionCode.V2,
+                new IPEndPoint(IPAddress.Parse("127.0.0.1"), 161),
+                new OctetString("ProjektZST"),
+                new List<Variable>() { new Variable(new ObjectIdentifier(watchedOID)) },
+                100);
+            return result[0].Data.ToString();
+        }
+
+        
+
+        private void watchTimer_Tick(object sender, EventArgs e)
+        {
+                watchedValueLabel.ChangeText(GetValueFromOID());           
+        }
+        
     }
 }
