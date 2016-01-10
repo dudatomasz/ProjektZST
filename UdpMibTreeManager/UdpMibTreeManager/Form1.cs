@@ -109,6 +109,26 @@ namespace UdpMibTreeManager
         {
                 watchedValueLabel.ChangeText(GetValueFromOID());           
         }
-        
+
+
+        private void setButton_Click(object sender, EventArgs e)
+        {
+            var value = setTextBox.Text;
+            var rec = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 161);
+            try
+            {
+                var o = Messenger.Set(VersionCode.V2,
+                    rec,
+                    new OctetString("ProjektZST"),
+                    new List<Variable>() { new Variable(new ObjectIdentifier(".1.3.6.1.2.1.1.6.0"), new OctetString(value)) },
+                    100);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(String.Format("Error occured: {0}", ex.Message), "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }           
+            
+            int k = 0;
+        }
     }
 }

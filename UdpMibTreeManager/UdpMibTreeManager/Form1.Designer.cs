@@ -38,6 +38,9 @@
             this.watchLabel = new System.Windows.Forms.Label();
             this.watchedValueLabel = new System.Windows.Forms.Label();
             this.watchTimer = new System.Windows.Forms.Timer(this.components);
+            this.setLabel = new System.Windows.Forms.Label();
+            this.setTextBox = new System.Windows.Forms.TextBox();
+            this.setButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chosenTableGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.delayNumericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +56,7 @@
             this.chosenTableGridView.Location = new System.Drawing.Point(12, 12);
             this.chosenTableGridView.Name = "chosenTableGridView";
             this.chosenTableGridView.ReadOnly = true;
-            this.chosenTableGridView.Size = new System.Drawing.Size(485, 273);
+            this.chosenTableGridView.Size = new System.Drawing.Size(524, 273);
             this.chosenTableGridView.TabIndex = 0;
             // 
             // getTableButton
@@ -112,7 +115,7 @@
             0,
             0});
             this.delayNumericUpDown.Name = "delayNumericUpDown";
-            this.delayNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.delayNumericUpDown.Size = new System.Drawing.Size(182, 20);
             this.delayNumericUpDown.TabIndex = 5;
             this.delayNumericUpDown.Value = new decimal(new int[] {
             100,
@@ -123,7 +126,7 @@
             // watchLabel
             // 
             this.watchLabel.AutoSize = true;
-            this.watchLabel.Location = new System.Drawing.Point(191, 288);
+            this.watchLabel.Location = new System.Drawing.Point(191, 292);
             this.watchLabel.Name = "watchLabel";
             this.watchLabel.Size = new System.Drawing.Size(122, 13);
             this.watchLabel.TabIndex = 6;
@@ -143,11 +146,41 @@
             this.watchTimer.Interval = 1;
             this.watchTimer.Tick += new System.EventHandler(this.watchTimer_Tick);
             // 
+            // setLabel
+            // 
+            this.setLabel.AutoSize = true;
+            this.setLabel.Location = new System.Drawing.Point(382, 292);
+            this.setLabel.Name = "setLabel";
+            this.setLabel.Size = new System.Drawing.Size(154, 13);
+            this.setLabel.TabIndex = 9;
+            this.setLabel.Text = "Ustaw wartość sysLocation na:";
+            // 
+            // setTextBox
+            // 
+            this.setTextBox.Location = new System.Drawing.Point(385, 308);
+            this.setTextBox.MaxLength = 255;
+            this.setTextBox.Name = "setTextBox";
+            this.setTextBox.Size = new System.Drawing.Size(151, 20);
+            this.setTextBox.TabIndex = 10;
+            // 
+            // setButton
+            // 
+            this.setButton.Location = new System.Drawing.Point(385, 334);
+            this.setButton.Name = "setButton";
+            this.setButton.Size = new System.Drawing.Size(75, 23);
+            this.setButton.TabIndex = 11;
+            this.setButton.Text = "Ustaw";
+            this.setButton.UseVisualStyleBackColor = true;
+            this.setButton.Click += new System.EventHandler(this.setButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 403);
+            this.ClientSize = new System.Drawing.Size(550, 403);
+            this.Controls.Add(this.setButton);
+            this.Controls.Add(this.setTextBox);
+            this.Controls.Add(this.setLabel);
             this.Controls.Add(this.watchedValueLabel);
             this.Controls.Add(this.watchLabel);
             this.Controls.Add(this.delayNumericUpDown);
@@ -176,6 +209,9 @@
         private System.Windows.Forms.Label watchLabel;
         private System.Windows.Forms.Label watchedValueLabel;
         private System.Windows.Forms.Timer watchTimer;
+        private System.Windows.Forms.Label setLabel;
+        private System.Windows.Forms.TextBox setTextBox;
+        private System.Windows.Forms.Button setButton;
     }
 }
 
