@@ -17,9 +17,20 @@ namespace UdpMibTreeManager
     public partial class Form1 : Form
     {
         private string watchedOID;
+        private Listener trapListener;
+        private List<string> messeges;
+        Form2 f;
         public Form1()
         {
             InitializeComponent();
+            trapListener = new Listener();
+            messeges = new List<string>();
+            trapListener.MessageReceived += TrapListener_MessageReceived;
+        }
+
+        private void TrapListener_MessageReceived(object sender, MessageReceivedEventArgs e)
+        {
+            messeges.Add(e.Message.ToString());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -95,12 +106,22 @@ namespace UdpMibTreeManager
 
         private string GetValueFromOID ()
         {
-            var result = Messenger.Get(VersionCode.V2,
-                new IPEndPoint(IPAddress.Parse("127.0.0.1"), 161),
-                new OctetString("ProjektZST"),
-                new List<Variable>() { new Variable(new ObjectIdentifier(watchedOID)) },
-                100);
-            return result[0].Data.ToString();
+            string r=String.Empty;
+            try {
+                var result = Messenger.Get(VersionCode.V2,
+                    new IPEndPoint(IPAddress.Parse("127.0.0.1"), 161),
+                    new OctetString("ProjektZST"),
+                    new List<Variable>() { new Variable(new ObjectIdentifier(watchedOID)) },
+                    1000);
+                return result[0].Data.ToString();
+
+            }
+            
+            catch (Exception ex)
+            {
+               r= GetValueFromOID();
+            }
+            return r;
         }
 
         
@@ -125,10 +146,27 @@ namespace UdpMibTreeManager
             }
             catch (Exception ex)
             {
-                MessageBox.Show(String.Format("Error occured: {0}", ex.Message), "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(String.Format("Błąd: {0}", ex.Message), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }           
             
             int k = 0;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            trapListener.AddBinding(new IPEndPoint(IPAddress.Any, 162));
+            trapListener.Start();
+        }
+
+        private void stopTrapButton_Click(object sender, EventArgs e)
+        {
+            trapListener.Stop();
+        }
+
+        private void trapButton_Click(object sender, EventArgs e)
+        {
+            f = new Form2(messeges);
+            f.ShowDialog();
         }
     }
 }

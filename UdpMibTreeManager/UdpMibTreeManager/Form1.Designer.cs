@@ -41,6 +41,9 @@
             this.setLabel = new System.Windows.Forms.Label();
             this.setTextBox = new System.Windows.Forms.TextBox();
             this.setButton = new System.Windows.Forms.Button();
+            this.trapButton = new System.Windows.Forms.Button();
+            this.startTrapButton = new System.Windows.Forms.Button();
+            this.stopTrapButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chosenTableGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.delayNumericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -71,7 +74,7 @@
             // 
             // watchObjectButton
             // 
-            this.watchObjectButton.Location = new System.Drawing.Point(12, 363);
+            this.watchObjectButton.Location = new System.Drawing.Point(196, 363);
             this.watchObjectButton.Name = "watchObjectButton";
             this.watchObjectButton.Size = new System.Drawing.Size(175, 23);
             this.watchObjectButton.TabIndex = 2;
@@ -105,7 +108,7 @@
             0});
             this.delayNumericUpDown.Location = new System.Drawing.Point(194, 308);
             this.delayNumericUpDown.Maximum = new decimal(new int[] {
-            1000,
+            100000,
             0,
             0,
             0});
@@ -137,9 +140,9 @@
             this.watchedValueLabel.AutoSize = true;
             this.watchedValueLabel.Location = new System.Drawing.Point(193, 339);
             this.watchedValueLabel.Name = "watchedValueLabel";
-            this.watchedValueLabel.Size = new System.Drawing.Size(183, 13);
+            this.watchedValueLabel.Size = new System.Drawing.Size(114, 13);
             this.watchedValueLabel.TabIndex = 8;
-            this.watchedValueLabel.Text = "Tu pokaże się monitorowana wartość";
+            this.watchedValueLabel.Text = "Monitorowana wartość";
             // 
             // watchTimer
             // 
@@ -173,11 +176,44 @@
             this.setButton.UseVisualStyleBackColor = true;
             this.setButton.Click += new System.EventHandler(this.setButton_Click);
             // 
+            // trapButton
+            // 
+            this.trapButton.Location = new System.Drawing.Point(12, 392);
+            this.trapButton.Name = "trapButton";
+            this.trapButton.Size = new System.Drawing.Size(175, 23);
+            this.trapButton.TabIndex = 12;
+            this.trapButton.Text = "Wyświetl powiadomienia";
+            this.trapButton.UseVisualStyleBackColor = true;
+            this.trapButton.Click += new System.EventHandler(this.trapButton_Click);
+            // 
+            // startTrapButton
+            // 
+            this.startTrapButton.Location = new System.Drawing.Point(12, 363);
+            this.startTrapButton.Name = "startTrapButton";
+            this.startTrapButton.Size = new System.Drawing.Size(75, 23);
+            this.startTrapButton.TabIndex = 13;
+            this.startTrapButton.Text = "Trap start";
+            this.startTrapButton.UseVisualStyleBackColor = true;
+            this.startTrapButton.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // stopTrapButton
+            // 
+            this.stopTrapButton.Location = new System.Drawing.Point(112, 363);
+            this.stopTrapButton.Name = "stopTrapButton";
+            this.stopTrapButton.Size = new System.Drawing.Size(75, 23);
+            this.stopTrapButton.TabIndex = 14;
+            this.stopTrapButton.Text = "Trap stop";
+            this.stopTrapButton.UseVisualStyleBackColor = true;
+            this.stopTrapButton.Click += new System.EventHandler(this.stopTrapButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 403);
+            this.ClientSize = new System.Drawing.Size(550, 426);
+            this.Controls.Add(this.stopTrapButton);
+            this.Controls.Add(this.startTrapButton);
+            this.Controls.Add(this.trapButton);
             this.Controls.Add(this.setButton);
             this.Controls.Add(this.setTextBox);
             this.Controls.Add(this.setLabel);
@@ -212,6 +248,9 @@
         private System.Windows.Forms.Label setLabel;
         private System.Windows.Forms.TextBox setTextBox;
         private System.Windows.Forms.Button setButton;
+        private System.Windows.Forms.Button trapButton;
+        private System.Windows.Forms.Button startTrapButton;
+        private System.Windows.Forms.Button stopTrapButton;
     }
 }
 
